@@ -1,0 +1,17 @@
+.countdownContainer {
+  width: 100%;
+  grid-column: 2 / -2;
+  display: grid;
+  grid-template-columns: 3ch 1ch 3ch 1ch 3ch 1ch 3ch;
+
+  span {
+    display: block;
+    text-align: center;
+  }
+}
+
+.countdownLabel {
+  font-size: clamp(1.6rem, 2vw, 2.1rem);
+  font-weight: 400;
+  font-family: var(--font-body);
+}
