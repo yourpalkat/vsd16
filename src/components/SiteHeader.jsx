@@ -7,7 +7,9 @@ const SiteHeader = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/">VSD 16</Link>
+            <Link to="/">
+              <img src="public/assets/logos/vsd-white-inverse.png" alt="VSD 16" ariaLabel="Video Store Day Home" className="headerLogo" />
+            </Link>
           </li>
           <li>
             <Link to="/about">About VSD</Link>

@@ -1,5 +1,6 @@
 // import { gql } from "@apollo/client";
 // import { useQuery } from "@apollo/client/react";
+import { useState } from "react";
 import StoreCard from "./StoreCard";
 import "./storelist.css";
 import tempStoreData from "./tempStoreData";
@@ -39,20 +40,86 @@ const StoreList = () => {
   // if (loading) return <p>Loading…</p>;
   // if (error) return <p>Error: {error.message}</p>;
 
+  // setAllStores(...data?.stores?.nodes);
+  const allStores = tempStoreData.sort(function(a, b) {
+   return a.videoStoreFields.storeName.toUpperCase().localeCompare(b.videoStoreFields.storeName.toUpperCase());
+  });
+  const [displayStores, setDisplayStores] = useState(allStores);
+  const [selectedSort, setSelectedSort] = useState("ALL");
+
+  const updateSort = (event) => {
+    console.log("Update sort,", event.target.value);
+    if (event.target.value === "ALL") {
+      setSelectedSort("ALL")
+      setDisplayStores(allStores);
+      return;
+    }
+    if (event.target.value === "CAN") {
+      setSelectedSort("CAN");
+      setDisplayStores(allStores.filter(store => store.videoStoreFields?.country.toLowerCase() === "canada"));
+      return;
+    }
+    if (event.target.value === "USA") {
+      setSelectedSort("USA");
+      setDisplayStores(allStores.filter(store => store.videoStoreFields?.country.toLowerCase() === "usa"));
+      return;
+    }
+    if (event.target.value === "REST") {
+      setSelectedSort("REST");
+      setDisplayStores(allStores.filter(store => store.videoStoreFields?.country.toLowerCase() !== "usa" && store.videoStoreFields?.country.toLowerCase() !== "canada"));
+      return;
+    }
+  }
+
   return (
     <div>
-      <div>
-        <p>Show stores from:</p>
-        <label htmlFor="CountryCanada">Canada</label>
-        <input type="radio" name="countrySwitcher" id="countryCanada" value="canada" />
-        <label htmlFor="CountryUsa">USA</label>
-        <input type="radio" name="countrySwitcher" id="countryUsa" value="usa" />
-        <label htmlFor="CountryRest">Everywhere else!</label>
-        <input type="radio" name="countrySwitcher" id="countryRest" value="restofworld" />
+      <div className="switcherContainer">
+        <h3 className="bold">Show stores from region:</h3>
+        <div className="segmented">
+          <label className="segmentedButton small">
+            <input 
+              type="radio" 
+              name="countrySwitcher" 
+              value="ALL" 
+              checked={selectedSort === 'ALL'} 
+              onChange={updateSort}
+            />
+            All
+          </label>
+          <label className="segmentedButton small">
+            <input 
+              type="radio" 
+              name="countrySwitcher" 
+              value="CAN" 
+              checked={selectedSort === 'CAN'} 
+              onChange={updateSort}
+            />
+            Canada
+          </label>
+          <label className="segmentedButton small">
+            <input 
+              type="radio" 
+              name="countrySwitcher" 
+              value="USA" 
+              checked={selectedSort === 'USA'} 
+              onChange={updateSort}
+            />
+            USA
+          </label>
+          <label className="segmentedButton small">
+            <input 
+              type="radio" 
+              name="countrySwitcher" 
+              value="REST" 
+              checked={selectedSort === 'REST'} 
+              onChange={updateSort}
+            />
+            Everywhere else!
+          </label>
+        </div>
       </div>
       <ul className="storeListContainer">
-        {/* {data.stores?.nodes?.map((store) => ( */}
-        {tempStoreData.map((store) => (
+        {displayStores?.map((store) => (
           <li id={store.id}>
             <StoreCard store={store} />
           </li>

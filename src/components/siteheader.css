@@ -14,11 +14,18 @@ header {
       margin-inline-end: auto;
     }
 
+    .headerLogo {
+      width: 100px;
+      position: relative;
+      z-index: 20;
+      top: 18px;
+    }
+
     li:not(:first-of-type) {
       margin-inline-start: 2.8em;
     }
 
-    a {
+    a:not(:has(.headerLogo)) {
       display: block;
       position: relative;
       text-decoration: none;

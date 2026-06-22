@@ -2,7 +2,7 @@
   width: 100%;
   grid-column: 2 / -2;
   display: grid;
-  grid-template-columns: 3ch 1ch 3ch 1ch 3ch 1ch 3ch;
+  grid-template-columns: 3ch 1ch 2ch 1ch 2ch 1ch 2ch;
 
   span {
     display: block;

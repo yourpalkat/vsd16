@@ -66,7 +66,7 @@ body {
   background-color: var(--theme-surface-primary);
 }
 
-p, h1, h2, h3, h4, h5, h6, header, footer {
+p, h1, h2, h3, h4, h5, h6, header, footer, label {
   font-size: clamp(1.6rem, 2vw, 2.1rem);
   line-height: 1.6;
   font-weight: 300;
@@ -81,6 +81,10 @@ p, h1, h2, h3, h4, h5, h6, header, footer {
 .small {
   font-size: 1.2rem;
   letter-spacing: 0.025rem;
+}
+
+.bold {
+  font-weight: 600;
 }
 
 a {
@@ -133,6 +137,24 @@ a {
   font-size: clamp(1.25rem, 10vw, 1.6rem);
   color: var(--theme-content-tertiary);
   margin-top: 1.6rem;
+}
+
+.cta {
+  display: inline-block;
+  width: auto;
+  background-color: var(--theme-surface-secondary);
+  color: var(--theme-content-primary);
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 10vw, 1.6rem);
+  letter-spacing: -0.05rem;
+  text-decoration: none;
+  padding: 0.8em 1.2em;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: var(--theme-surface-primary);
+  }
 }
 
 /* Global styles
@@ -228,7 +250,7 @@ main {
   color: var(--theme-content-primary-inverse);
   position: relative;
   
-  h3 {
+  .heading3 {
     color: var(--theme-content-secondary-inverse);
   }
 
@@ -241,5 +263,33 @@ main {
     width: 100%;
     height: 3.2rem;
     background: linear-gradient(to bottom right, transparent 0%, transparent 50%, var(--theme-surface-primary-inverse) 50%, var(--theme-surface-primary-inverse) 100%);
+  }
+}
+
+.aboutList {
+  margin-block-start: 3.2rem;
+
+  li {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    gap: 2.4rem;
+    margin-bottom: 2.4rem;
+
+    img {
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      width: 100px;
+      flex-grow: 1;
+      max-width: 140px;
+    }
+
+    p {
+      max-width: 50ch;
+    }
+
+    h3 {
+      margin-top: 0;
+    }
   }
 }

@@ -13,9 +13,11 @@ function Index() {
         <CountdownTimer />
       </section>
       <section className="gridWrapper sectionTwo">
-        <h3 className="heading3">Participating Stores</h3>
-        <p>selction of 4 stores</p>
-        <p>CTA to go to stores page</p>
+        <div>
+          <h3 className="heading3">Participating Stores</h3>
+          <p>Here's a few of the stores participating in VSD 16, but this is only a sample! Click the link to see many, many more!</p>
+          <a href="/stores" className="cta">Find a store near you!</a>
+        </div>
       </section>
       <section className="gridWrapper sectionThree">
         <h3 className="heading3">Featuring</h3>
