@@ -15,17 +15,17 @@ function Index() {
         <CountdownTimer />
       </section>
       <section className="gridWrapper sectionTwo">
+        <h3 className="heading3">Featuring</h3>
+        <p>Logos of and links to industry partners here</p>
+        <p>Also if we're doing tie-in releases or what have you, they go here</p>
+      </section>
+      <section className="gridWrapper sectionThree">
         <div>
           <h3 className="heading3">Participating Stores</h3>
-          <p>Here's a few of the stores participating in VSD 16, but this is only a sample! Check the <Link to="/stores">Stores page</Link> to see many, many more!</p>
+          <p>Here's just a few of the stores participating in VSD 16. This is only a sample! Check the <Link to="/stores">Stores page</Link> to see the full list of many, many more and find a store near you!</p>
           <StoreSample />
           <Link to="/stores" className="cta">Find a store near you!</Link>
         </div>
-      </section>
-      <section className="gridWrapper sectionThree">
-        <h3 className="heading3">Featuring</h3>
-        <p>Logos of and links to industry partners here</p>
-        <p>Also if we're doing tie-in releases or exclusives or what have you, they go here</p>
       </section>
     </>
   );

@@ -31,9 +31,9 @@ details { display: block; } summary { display: list-item; } template { display: 
   --colour-white: rgb(255, 255, 255);
   --colour-mythical-night: rgb(9, 28, 69);
   --colour-deep-space-rodeo: rgb(51, 36, 133);
-  --colour-lilac-spring: rgb(138, 46, 194);
-  --colour-death-of-a-star: rgb(227, 104, 215);
-  --colour-cherry-blossom: rgb(246, 192, 216);
+  --colour-lilac-spring: rgb(128, 30, 189);
+  --colour-death-of-a-star: rgb(236, 114, 238);
+  --colour-cherry-blossom: rgb(237, 192, 246);
 
   --theme-surface-primary: var(--colour-mythical-night);
   --theme-surface-secondary: var(--colour-deep-space-rodeo);

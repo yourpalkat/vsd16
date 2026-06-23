@@ -11,11 +11,11 @@ const SiteHeader = () => {
 
   return (
     <header className="gridWrapper">
-      <nav>
-        <ul className="desktopNav">
+      <nav className="desktopNav">
+        <ul>
           <li>
             <Link to="/">
-              <img src="public/assets/logos/vsd-white-inverse.png" alt="" ariaLabel="Video Store Day Home" className="headerLogo" />
+              <img src="public/assets/logos/vsd-logo.png" alt="" ariaLabel="Video Store Day Home" className="headerLogo" />
             </Link>
           </li>
           <li className="desktop">
@@ -23,6 +23,9 @@ const SiteHeader = () => {
           </li>
           <li className="desktop">
             <Link to="/stores">Find a Store</Link>
+          </li>
+          <li className="desktop">
+            <Link to="/register">Sign Up</Link>
           </li>
           <li className="desktop">
             <Link to="/merch">Merch</Link>
@@ -38,6 +41,7 @@ const SiteHeader = () => {
           <li><Link to="/" onClick={handleNavOpen}>Home</Link></li>
           <li><Link to="/about" onClick={handleNavOpen}>About VSD</Link></li>
           <li><Link to="/stores" onClick={handleNavOpen}>Find a Store</Link></li>
+          <li><Link to="/register" onClick={handleNavOpen}>Sign Up</Link></li>
           <li><Link to="/merch" onClick={handleNavOpen}>Merch</Link></li>
         </ul>
       </nav>
