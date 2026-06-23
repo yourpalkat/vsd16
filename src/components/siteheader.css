@@ -5,20 +5,22 @@ header {
   top: 0;
   left: 0;
   right: 0;
+  height: 48px;
 
-  nav ul {
+  .desktopNav {
     display: flex;
     justify-content: end;
+    align-items: center;
     
     li:first-of-type {
       margin-inline-end: auto;
     }
 
     .headerLogo {
-      width: 100px;
+      height: 48px;
       position: relative;
       z-index: 20;
-      top: 18px;
+      top: 12px;
     }
 
     li:not(:first-of-type) {
@@ -30,7 +32,6 @@ header {
       position: relative;
       text-decoration: none;
       cursor: pointer;
-      padding-block: 1.6rem;
 
       &::after {
         content: "";
@@ -54,9 +55,57 @@ header {
     display: block;
     content: "";
     width: 100%;
-    top: 100%;
+    bottom: -3.2rem;
     left: 0;
     height: 3.2rem;
     background: linear-gradient(to top left, transparent 0%, transparent 50%, var(--theme-surface-primary) 50%, var(--theme-surface-primary) 100%);
+  }
+}
+
+.desktop {
+  display: none;
+
+  @media (width >= 768px) {
+    display: block;
+  }
+}
+
+.mobile {
+  display: block;
+
+  @media (width >= 768px) {
+    display: none;
+  }
+}
+
+.navButton {
+  appearance: none;
+  border: 0;
+  background-color: transparent;
+  height: 48px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  cursor: pointer;
+}
+
+.mobileNav {
+  position: fixed;
+  z-index: 30;
+  top: 46px;
+  bottom: 0;
+  width: 300px;
+  left: 100%;
+  transition: all 0.3s ease-in-out;
+
+  background-color: var(--theme-surface-primary);
+
+  li {
+    padding: 1.8rem 2.4rem;
+    margin: 0;
+  }
+
+  &.open {
+    left: calc(100% - 300px);
   }
 }

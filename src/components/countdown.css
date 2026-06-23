@@ -2,6 +2,7 @@
   width: 100%;
   grid-column: 2 / -2;
   display: grid;
+  justify-content: end;
   grid-template-columns: 3ch 1ch 2ch 1ch 2ch 1ch 2ch;
 
   span {
@@ -14,4 +15,12 @@
   font-size: clamp(1.6rem, 2vw, 2.1rem);
   font-weight: 400;
   font-family: var(--font-body);
+
+  .desktop {
+    display: none;
+
+    @media (width >= 768px) {
+      display: inline;
+    }
+  }
 }

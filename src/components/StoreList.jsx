@@ -48,7 +48,6 @@ const StoreList = () => {
   const [selectedSort, setSelectedSort] = useState("ALL");
 
   const updateSort = (event) => {
-    console.log("Update sort,", event.target.value);
     if (event.target.value === "ALL") {
       setSelectedSort("ALL")
       setDisplayStores(allStores);

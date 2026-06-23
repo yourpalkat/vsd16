@@ -13,6 +13,25 @@
   }
 }
 
+.storeSampleContainer {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2.4rem 0;
+  
+  display: grid;
+  gap: 2.4rem;
+  grid-template-columns: repeat(2, minmax(140px, 1fr));
+  
+  li {
+    padding: 0;
+    margin: 0;
+  }
+
+  @media (width >= 720px) {
+    grid-template-columns: repeat(4, minmax(140px, 1fr));
+  }
+}
+
 .switcherContainer {
   display: flex;
   flex-direction: column;

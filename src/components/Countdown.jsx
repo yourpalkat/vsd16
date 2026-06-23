@@ -41,7 +41,7 @@ const CountdownTimer = () => {
 
   return (
     <h2 className="countdownContainer heading2" aria-hidden>
-      <span className="countdownLabel">days</span><span></span><span className="countdownLabel">hours</span><span></span><span className="countdownLabel">minutes</span><span></span><span className="countdownLabel">seconds</span>
+      <span className="countdownLabel">days</span><span></span><span className="countdownLabel">h<span className="desktop">ou</span>rs</span><span></span><span className="countdownLabel">min<span className="desktop">ute</span>s</span><span></span><span className="countdownLabel">sec<span className="desktop">ond</span>s</span>
       <span>{days}</span><span>:</span><span>{hours}</span><span>:</span><span>{minutes}</span><span>:</span><span>{seconds}</span>
     </h2>
   );

@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import CountdownTimer from "../components/Countdown";
+import StoreSample from "../components/StoreSample";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -8,15 +9,17 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <>
-      <section className="gridWrapper sectionOne">
+      <section className="gridWrapper sectionOne homeSplash">
         <h1 className="heading1"><span>16th International Independent</span>Video Store Day</h1>
+        <h2 className="subHeading">October 17, 2026</h2>
         <CountdownTimer />
       </section>
       <section className="gridWrapper sectionTwo">
         <div>
           <h3 className="heading3">Participating Stores</h3>
-          <p>Here's a few of the stores participating in VSD 16, but this is only a sample! Click the link to see many, many more!</p>
-          <a href="/stores" className="cta">Find a store near you!</a>
+          <p>Here's a few of the stores participating in VSD 16, but this is only a sample! Check the <Link to="/stores">Stores page</Link> to see many, many more!</p>
+          <StoreSample />
+          <Link to="/stores" className="cta">Find a store near you!</Link>
         </div>
       </section>
       <section className="gridWrapper sectionThree">
