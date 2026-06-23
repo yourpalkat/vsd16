@@ -20,21 +20,21 @@ function AboutPage() {
           <h2 className="heading3">Brought to you by...</h2>
           <ul className="aboutList">
             <li>
-              <img src="/public/assets/about/daniel.jpg" alt="Daniel Hanna" />
+              <img src="/assets/about/daniel.jpg" alt="Daniel Hanna" />
               <div>
                 <h3 className="heading5">Daniel Hanna</h3>
                 <p>Owner and Proprietor of Eyesore Cinema and the creator/ instigator of International Independent Video Store Day.</p>
               </div>
             </li>
             <li>
-              <img src="/public/assets/about/nick.jpg" alt="Nick Sewell" />
+              <img src="/assets/about/nick.jpg" alt="Nick Sewell" />
               <div>
                 <h3 className="heading5">Nick Sewell</h3>
                 <p>Former Video Store Employee, Rock Star and Graphic Designer. Creates all our yearly logos.</p>
               </div>
             </li>
             <li>
-              <img src="/public/assets/about/paul.jpg" alt="Paul Traynor" />
+              <img src="/assets/about/paul.jpg" alt="Paul Traynor" />
               <div>
                 <h3 className="heading5">Paul Traynor</h3>
                 <p>The strong silent right hand of VSD. Manager of the "Independent DVD Rental Shop Owners Worldwide" group.</p>
