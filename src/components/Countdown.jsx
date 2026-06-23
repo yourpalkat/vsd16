@@ -23,6 +23,7 @@ const CountdownTimer = () => {
     if (distance < 0) {
       clearInterval(x);
       setComplete(true);
+      return;
     }
 
     // Time calculations for days, hours, minutes and seconds
