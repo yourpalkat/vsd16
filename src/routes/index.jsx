@@ -31,6 +31,28 @@ query HomepageContent {
       }
     }
   }
+  stores {
+    nodes {
+      id
+      title
+      videoStoreFields {
+        storeName
+        streetAddress
+        city
+        stateprovince
+        country
+        videoStoreDayParticipant
+        website
+        instagram
+        facebook
+      }
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
 }
 `;
 
@@ -47,6 +69,7 @@ function Index() {
   };
 
   const pageContent = data?.page?.homepageFields;
+  const allStores = data?.stores?.nodes;
 
   return (
     <>
@@ -73,7 +96,7 @@ function Index() {
               <h3 className="heading3">{pageContent.sectionThree.subheadSectionThree}</h3>
             )}
             <div dangerouslySetInnerHTML={{ __html: pageContent.sectionThree.introTextSectionThree }}></div>
-            <StoreSample />
+            <StoreSample allStores={allStores} />
             {pageContent.sectionThree.ctaLink && (
               <Link to={pageContent.sectionThree.ctaLink} className="cta">{pageContent.sectionThree.ctaText}</Link>
             )}
