@@ -15,7 +15,7 @@ const SiteHeader = () => {
         <ul>
           <li>
             <Link to="/">
-              <img src="/assets/logos/vsd-logo.png" alt="" ariaLabel="Video Store Day Home" className="headerLogo" />
+              <img src="/assets/logos/vsd-logo.png" alt="" aria-label="Video Store Day Home" className="headerLogo" />
             </Link>
           </li>
           <li className="desktop">
@@ -31,7 +31,7 @@ const SiteHeader = () => {
             <Link to="/merch">Merch</Link>
           </li>
           <li className="mobile">
-            <button type="button" className="navButton" onClick={handleNavOpen} ariaLabel="Open/close mobile navigation">
+            <button type="button" className="navButton" onClick={handleNavOpen} aria-label="Open/close mobile navigation">
               <img src={navOpen ? '/assets/icons/close.svg' : '/assets/icons/menu.svg'} alt="" />
             </button>
           </li>
