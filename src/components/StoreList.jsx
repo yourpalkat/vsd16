@@ -1,47 +1,51 @@
-// import { gql } from "@apollo/client";
-// import { useQuery } from "@apollo/client/react";
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
 import { useState } from "react";
 import StoreCard from "./StoreCard";
 import "./storelist.css";
-import tempStoreData from "./tempStoreData";
 
-// const GET_ALL_STORES = gql`
-//   query GetAllStores {
-//     stores {
-//       nodes {
-//         id
-//         title
-//         videoStoreFields {
-//           storeName
-//           streetAddress
-//           city
-//           stateprovince
-//           country
-//           videoStoreDayParticipant
-//           website
-//           instagram
-//           facebook
-//         }
-//         featuredImage {
-//           node {
-//             sourceUrl
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
-
-// TODO: replace mocked data, restore commented-out Apollo GQL query 
+const GET_ALL_STORES = gql`
+  query GetAllStores {
+    stores {
+      nodes {
+        id
+        title
+        videoStoreFields {
+          storeName
+          streetAddress
+          city
+          stateprovince
+          country
+          videoStoreDayParticipant
+          website
+          instagram
+          facebook
+        }
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+`;
 
 const StoreList = () => {
-  // const { loading, error, data } = useQuery(GET_ALL_STORES);
+  const { loading, error, data } = useQuery(GET_ALL_STORES);
 
-  // if (loading) return <p>Loading…</p>;
-  // if (error) return <p>Error: {error.message}</p>;
+  if (loading) {
+    return <p>Loading…</p>
+
+  };
+
+  if (error) {
+    console.log("Error fetching content: ", error.message);
+    return;
+  };
 
   // setAllStores(...data?.stores?.nodes);
-  const allStores = tempStoreData.sort(function(a, b) {
+  const allStores = [...data?.stores?.nodes].sort(function(a, b) {
    return a.videoStoreFields.storeName.toUpperCase().localeCompare(b.videoStoreFields.storeName.toUpperCase());
   });
   const [displayStores, setDisplayStores] = useState(allStores);
