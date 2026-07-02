@@ -1,55 +1,14 @@
-import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client/react";
 import { createFileRoute } from "@tanstack/react-router";
 import StoreList from "../components/StoreList";
+import { GET_STORE_PAGE_CONTENT } from "../graphql";
 
 export const Route = createFileRoute("/stores")({
   component: Stores,
 });
 
-const GET_PAGE_CONTENT = gql`
-  query StorePageContent {
-    page(id: "cG9zdDoxMTA=") {
-      title
-      slug
-      storePageFields {
-        sectionOne {
-          headingSectionOne
-          introTextSectionOne
-        }
-        sectionTwo {
-          subheadSectionTwo
-          introTextSectionTwo
-        }
-      }
-    }
-    stores {
-      nodes {
-        id
-        title
-        videoStoreFields {
-          storeName
-          streetAddress
-          city
-          stateprovince
-          country
-          videoStoreDayParticipant
-          website
-          instagram
-          facebook
-        }
-        featuredImage {
-          node {
-            sourceUrl
-          }
-        }
-      }
-    }
-  }
-`;
-
 function Stores() {
-  const { loading, error, data } = useQuery(GET_PAGE_CONTENT);
+  const { loading, error, data } = useQuery(GET_STORE_PAGE_CONTENT);
 
   if (loading) {
     return <p>Loading…</p>

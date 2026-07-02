@@ -1,13 +1,150 @@
 import { createRoot } from "react-dom/client";
-import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
+import { ApolloClient, HttpLink, InMemoryCache, ApolloLink } from "@apollo/client";
 import { ApolloProvider } from "@apollo/client/react";
+import { onError } from '@apollo/client/link/error';
+import { Observable } from '@apollo/client/utilities';
 import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { GraphQLClient } from 'graphql-request';
 import { routeTree } from "./routeTree.gen";
+import { GET_CURRENT_SESSION_TOKEN } from "./graphql";
 
 const router = createRouter({ routeTree });
+const endpoint = import.meta.env.VITE_GRAPHQL_ENDPOINT;
 
+const httpLink = new HttpLink({
+  uri: endpoint,
+});
+
+// const authLink = new SetContextLink(async ({ headers }) => {
+//   // get the authentication token from local storage if it exists
+//   const token = localStorage.getItem("token");
+//   const sessionToken = await getSessionToken();
+//   // return the headers to the context so httpLink can read them
+//   return {
+//     headers: {
+//       ...headers,
+//       authorization: token ? `Bearer ${token}` : "",
+//     },
+//   };
+// });
+
+
+// Session Token Management
+async function fetchSessionToken() {
+  let sessionToken;
+  try {
+    const graphQLClient = new GraphQLClient(endpoint);
+
+    const tokenData = await graphQLClient.request(GET_CURRENT_SESSION_TOKEN);
+
+    // If user doesn't have an account return accountNeeded flag.
+    sessionToken = tokenData?.customer?.sessionToken;
+
+    if (!sessionToken) {
+      throw new Error('Failed to retrieve a new session token');
+    }
+  } catch (err) {
+    console.error(err);
+  }
+
+  return sessionToken;
+}
+
+function createErrorLink() {
+  return onError(({ graphQLErrors, operation, forward }) => {
+    const targetErrors = [
+      'The iss do not match with this server',
+      'invalid-secret-key | Expired token',
+      'invalid-secret-key | Signature verification failed',
+      'Expired token',
+      'Wrong number of segments',
+    ];
+    let observable;
+    if (graphQLErrors?.length) {
+      graphQLErrors.map(({ debugMessage, message }) => {
+        if (targetErrors.includes(message) || targetErrors.includes(debugMessage)) {
+          observable = new Observable((observer) => {
+            getSessionToken(true)
+              .then((sessionToken) => {
+                operation.setContext(({ headers = {} }) => {
+                  const nextHeaders = headers;
+
+                  if (sessionToken) {
+                    nextHeaders['woocommerce-session'] = `Session ${sessionToken}`;
+                  } else {
+                    delete nextHeaders['woocommerce-session'];
+                  }
+
+                  return {
+                    headers: nextHeaders,
+                  };
+                });
+              })
+              .then(() => {
+                const subscriber = {
+                  next: observer.next.bind(observer),
+                  error: observer.error.bind(observer),
+                  complete: observer.complete.bind(observer),
+                };
+                forward(operation).subscribe(subscriber);
+              })
+              .catch((error) => {
+                observer.error(error);
+              });
+          });
+        }
+      });
+    }
+    return observable;
+  });
+}
+
+export async function getSessionToken(forceFetch = false) {
+  let sessionToken = localStorage.getItem(process.env.VITE_SESSION_TOKEN_LS_KEY);
+  if (!sessionToken || forceFetch) {
+    sessionToken = await fetchSessionToken();
+  }
+  return sessionToken;
+}
+
+const consoleLink = new ApolloLink((operation, forward) => {
+  operation.setContext(async () => {
+    const headers = {};
+    const sessionToken = await getSessionToken();
+
+    if (sessionToken) {
+      headers['woocommerce-session'] = `Session ${sessionToken}`;
+      return { headers };
+    }
+
+    return {};
+  });
+  return forward(operation);
+});
+
+// function createSessionLink() {
+//   return setContext(async (operation) => {
+//     const headers = {};
+//     const sessionToken = await getSessionToken();
+
+//     if (sessionToken) {
+//       headers['woocommerce-session'] = `Session ${sessionToken}`;
+
+//       return { headers };
+//     }
+
+//     return {};
+//   });
+// }
+
+// link: authLink.concat(httpLink),
 const client = new ApolloClient({
-  link: new HttpLink({ uri: "http://localhost:8888/wordpress/graphql" }),
+  link: ApolloLink.from([
+    consoleLink,
+    createErrorLink(),
+    // createUpdateLink(),
+    httpLink,
+  ]),
   cache: new InMemoryCache(),
 });
 
