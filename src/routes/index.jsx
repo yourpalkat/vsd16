@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client/react";
+import { GET_HOME_PAGE_CONTENT } from "../graphql";
 import CountdownTimer from "../components/Countdown";
 import StoreSample from "../components/StoreSample";
 
@@ -8,56 +8,8 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const GET_PAGE_CONTENT = gql`
-query HomepageContent {
-  page(id: "cG9zdDo2Ng==") {
-    title
-    slug
-    homepageFields {
-      headline
-      surtitle
-      date
-      sectionTwo {
-        subheadSectionTwo
-        introTextSectionTwo
-        ctaLink
-        ctaText
-      }
-      sectionThree {
-        subheadSectionThree
-        introTextSectionThree
-        ctaLink
-        ctaText
-      }
-    }
-  }
-  stores {
-    nodes {
-      id
-      title
-      videoStoreFields {
-        storeName
-        streetAddress
-        city
-        stateprovince
-        country
-        videoStoreDayParticipant
-        website
-        instagram
-        facebook
-      }
-      featuredImage {
-        node {
-          sourceUrl
-        }
-      }
-    }
-  }
-}
-`;
-
 function Index() {
-  const { loading, error, data } = useQuery(GET_PAGE_CONTENT);
+  const { loading, error, data } = useQuery(GET_HOME_PAGE_CONTENT);
 
   if (loading) {
     return <p>Loading…</p>

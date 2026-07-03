@@ -1,59 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client/react";
+import { GET_ABOUT_PAGE_CONTENT } from "../graphql";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
 });
 
-const GET_PAGE_CONTENT = gql`
-  query AboutContent {
-    page(id: "cG9zdDo4NA==") {
-      title
-      slug
-      aboutPageFields {
-        sectionOne {
-          subheadSectionOne
-          contentSectionOne
-        }
-        sectionTwo {
-          subheadSectionTwo
-          nameOne
-          bioOne
-          headshotOne {
-            node {
-              altText
-              sourceUrl
-            }
-          }
-          nameTwo
-          bioTwo
-          headshotTwo {
-            node {
-              altText
-              sourceUrl
-            }
-          }
-          nameThree
-          bioThree
-          headshotThree {
-            node {
-              altText
-              sourceUrl
-            }
-          }
-        }
-        sectionThree {
-          subheadSectionThree
-          contentSectionThree
-        }
-      }
-    }
-  }
-`;
-
 function AboutPage() {
-    const { loading, error, data } = useQuery(GET_PAGE_CONTENT);
+    const { loading, error, data } = useQuery(GET_ABOUT_PAGE_CONTENT);
   
     if (loading) {
       return <p>Loading…</p>
