@@ -7,6 +7,7 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { GraphQLClient } from 'graphql-request';
 import { routeTree } from "./routeTree.gen";
 import { GET_CURRENT_SESSION_TOKEN } from "./graphql";
+import { StrictMode } from "react";
 
 const router = createRouter({ routeTree });
 const endpoint = import.meta.env.VITE_GRAPHQL_ENDPOINT;
@@ -150,9 +151,11 @@ const client = new ApolloClient({
 
 const App = () => {
   return (
-    <ApolloProvider client={client}>
-      <RouterProvider router={router} />
-    </ApolloProvider>
+    <StrictMode>
+      <ApolloProvider client={client}>
+        <RouterProvider router={router} />
+      </ApolloProvider>
+    </StrictMode>
   );
 };
 
