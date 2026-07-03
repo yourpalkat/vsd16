@@ -84,7 +84,7 @@ export const GET_ALL_PRODUCTS = gql`
 
 export const GET_ABOUT_PAGE_CONTENT = gql`
   query AboutContent {
-    page(id: "cG9zdDo4NA==") {
+    page(id: "cG9zdDozMw==") {
       title
       slug
       aboutPageFields {
@@ -130,7 +130,7 @@ export const GET_ABOUT_PAGE_CONTENT = gql`
 
 export const GET_HOME_PAGE_CONTENT = gql`
   query HomepageContent {
-    page(id: "cG9zdDo2Ng==") {
+    page(id: "cG9zdDozOA==") {
       title
       slug
       homepageFields {
@@ -178,7 +178,7 @@ export const GET_HOME_PAGE_CONTENT = gql`
 
 export const GET_STORE_PAGE_CONTENT = gql`
   query StorePageContent {
-    page(id: "cG9zdDoxMTA=") {
+    page(id: "cG9zdDozNg==") {
       title
       slug
       storePageFields {
