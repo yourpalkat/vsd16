@@ -18,7 +18,7 @@ function AboutPage() {
       return;
     };
   
-  const pageContent = data?.page?.aboutPageFields;
+  const pageContent = data?.pages?.nodes?.[0]?.aboutPageFields;
 
   return (
     <>

@@ -8,7 +8,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-function Index() {
+export function Index() {
   const { loading, error, data } = useQuery(GET_HOME_PAGE_CONTENT);
 
   if (loading) {
@@ -20,7 +20,7 @@ function Index() {
     return;
   };
 
-  const pageContent = data?.page?.homepageFields;
+  const pageContent = data?.pages?.nodes?.[0]?.homepageFields;
   const allStores = data?.stores?.nodes;
 
   return (
