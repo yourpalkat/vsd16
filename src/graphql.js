@@ -84,44 +84,46 @@ export const GET_ALL_PRODUCTS = gql`
 
 export const GET_ABOUT_PAGE_CONTENT = gql`
   query AboutContent {
-    page(id: "cG9zdDozMw==") {
-      title
-      slug
-      aboutPageFields {
-        sectionOne {
-          subheadSectionOne
-          contentSectionOne
-        }
-        sectionTwo {
-          subheadSectionTwo
-          nameOne
-          bioOne
-          headshotOne {
-            node {
-              altText
-              sourceUrl
+    pages(where: { title: "about" }) {
+      nodes {
+        title
+        slug
+        aboutPageFields {
+          sectionOne {
+            subheadSectionOne
+            contentSectionOne
+          }
+          sectionTwo {
+            subheadSectionTwo
+            nameOne
+            bioOne
+            headshotOne {
+              node {
+                altText
+                sourceUrl
+              }
+            }
+            nameTwo
+            bioTwo
+            headshotTwo {
+              node {
+                altText
+                sourceUrl
+              }
+            }
+            nameThree
+            bioThree
+            headshotThree {
+              node {
+                altText
+                sourceUrl
+              }
             }
           }
-          nameTwo
-          bioTwo
-          headshotTwo {
-            node {
-              altText
-              sourceUrl
-            }
+          sectionThree {
+            subheadSectionThree
+            contentSectionThree
           }
-          nameThree
-          bioThree
-          headshotThree {
-            node {
-              altText
-              sourceUrl
-            }
-          }
-        }
-        sectionThree {
-          subheadSectionThree
-          contentSectionThree
         }
       }
     }
@@ -130,24 +132,26 @@ export const GET_ABOUT_PAGE_CONTENT = gql`
 
 export const GET_HOME_PAGE_CONTENT = gql`
   query HomepageContent {
-    page(id: "cG9zdDozOA==") {
-      title
-      slug
-      homepageFields {
-        headline
-        surtitle
-        date
-        sectionTwo {
-          subheadSectionTwo
-          introTextSectionTwo
-          ctaLink
-          ctaText
-        }
-        sectionThree {
-          subheadSectionThree
-          introTextSectionThree
-          ctaLink
-          ctaText
+    pages(where: { title: "home" }) {
+      nodes {
+        title
+        slug
+        homepageFields {
+          headline
+          surtitle
+          date
+          sectionTwo {
+            subheadSectionTwo
+            introTextSectionTwo
+            ctaLink
+            ctaText
+          }
+          sectionThree {
+            subheadSectionThree
+            introTextSectionThree
+            ctaLink
+            ctaText
+          }
         }
       }
     }
@@ -178,17 +182,19 @@ export const GET_HOME_PAGE_CONTENT = gql`
 
 export const GET_STORE_PAGE_CONTENT = gql`
   query StorePageContent {
-    page(id: "cG9zdDozNg==") {
-      title
-      slug
-      storePageFields {
-        sectionOne {
-          headingSectionOne
-          introTextSectionOne
-        }
-        sectionTwo {
-          subheadSectionTwo
-          introTextSectionTwo
+    pages(where: { title: "stores" }) {
+      nodes {
+        title
+        slug
+        storePageFields {
+          sectionOne {
+            headingSectionOne
+            introTextSectionOne
+          }
+          sectionTwo {
+            subheadSectionTwo
+            introTextSectionTwo
+          }
         }
       }
     }

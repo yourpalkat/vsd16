@@ -20,7 +20,7 @@ function Stores() {
   };
 
   const allStores = [...data?.stores?.nodes];
-  const pageContent = { ...data?.page?.storePageFields };
+  const pageContent = { ...data?.pages?.nodes[0]?.storePageFields };
 
   return (
     <>
