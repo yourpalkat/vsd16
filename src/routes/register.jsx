@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import RegisterForm from "../components/RegisterForm";
 
 export const Route = createFileRoute("/register")({
   component: RegisterPage,
@@ -14,7 +15,8 @@ function RegisterPage() {
       <section className="gridWrapper sectionTwo">
         <div>
           <h2 className="heading3">Sign-up Form</h2>
-          <p>The thing you have to do to register a store and send money will go here</p>
+          <p>Want to join up? Just fill out your details below. An asterisk (*) indicates a required field, others are optional.</p>
+          <RegisterForm />
         </div>
       </section>
     </>

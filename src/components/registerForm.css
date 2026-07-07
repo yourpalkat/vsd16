@@ -1,0 +1,85 @@
+.registerForm {
+  margin-top: 2.4rem;
+
+  .twoColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    gap: 0;
+
+    label {
+      flex-basis: 100%;
+      min-width: 250px;
+    }
+    
+    @media (min-width: 720px) {
+      flex-direction: row;
+      justify-content: start;
+      align-items: start;
+      flex-wrap: wrap;
+      gap: 1.6rem;
+
+      label {
+        flex-basis: calc(50% - 1.6rem);
+        min-width: 300px;
+      }
+    }
+  }
+
+  .threeColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    gap: 0;
+
+    label {
+      flex-basis: 100%;
+      min-width: 250px;
+    }
+    
+    @media (min-width: 720px) {
+      flex-direction: row;
+      justify-content: start;
+      align-items: start;
+      flex-wrap: wrap;
+      gap: 1.6rem;
+  
+      label {
+        flex-basis: calc(33.33% - 1.6rem);
+        min-width: 250px;
+      }
+    }
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: stretch;
+    margin-bottom: 2.4rem;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  input[type=text] {
+    border: none;
+    padding: 0.4em;
+    border-radius: 4px;
+    margin-top: 0.4em;
+    font-size: 1.4rem;
+
+    &:focus-visible {
+      outline: 2px solid var(--theme-content-secondary-inverse);
+    }
+  }
+
+  button.cta {
+    border: none;
+    display: inline-block;
+  }
+}
