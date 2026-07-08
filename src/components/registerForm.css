@@ -56,14 +56,23 @@
   }
 
   label {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: stretch;
-    margin-bottom: 2.4rem;
+    margin-bottom: 2.6rem;
     font-size: 1.4rem;
     line-height: 1.6;
     font-weight: 400;
+
+    &:has(input.error)::after {
+      content: "This field is required!";
+      font-size: 1.2rem;
+      font-weight: 500;
+      position: absolute;
+      bottom: -2rem;
+    }
   }
 
   input[type=text] {
@@ -75,6 +84,10 @@
 
     &:focus-visible {
       outline: 2px solid var(--theme-content-secondary-inverse);
+    }
+
+    &.error {
+      outline: 2px solid red;
     }
   }
 

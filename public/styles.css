@@ -169,6 +169,25 @@ a, button, input {
   }
 }
 
+.ctaOutline {
+  display: inline-block;
+  width: auto;
+  background-color: var(--theme-surface-tertiary);
+  color: var(--theme-content-primary);
+  outline: 1px solid var(--theme-content-primary);
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 10vw, 1.6rem);
+  letter-spacing: 0.05rem;
+  text-decoration: none;
+  padding: 0.8em 1.2em;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: var(--theme-surface-primary);
+  }
+}
+
 /* Global styles
 ========================================================================== */
 
@@ -226,6 +245,14 @@ ol {
 .gridWrapper section {
   display: grid;
   grid-template-columns: subgrid;
+}
+
+.spacer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+  flex-wrap: wrap;
 }
 
 main {
