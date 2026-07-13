@@ -15,7 +15,7 @@ function RegisterPage() {
       <section className="gridWrapper sectionTwo">
         <div>
           <h2 className="heading3">Sign-up Form</h2>
-          <p>Want to join up? Just fill out your details below. An asterisk (*) indicates a required field, others are optional.</p>
+          <p>Want to join up? Just fill out your details below, and then click "continue" to proceed to payment. An asterisk (*) indicates a required field, others are optional.</p>
           <RegisterForm />
         </div>
       </section>

@@ -1,20 +1,34 @@
 import { useState, useRef } from "react";
+import { useMutation } from "@apollo/client/react";
+import { CREATE_STORE } from "../graphql";
 import "./registerForm.css";
 
 const RegisterForm = () => {
+  const [addStore, { data, loading, error }] = useMutation(CREATE_STORE);
   const [formStage, setFormStage] = useState(1);
   const [payload, setPayload] = useState({
     storeName: "",
+    contact: "",
+    email: "",
     website: "", 
+    phone: "",
     streetAddress: "", 
     city: "", 
-    stateProvince: "", 
+    stateprovince: "", 
     country: "",
     instagram: "",
-    facebook: ""
+    facebook: "",
+    rent: false,
+    sales: false,
+    videoStoreDayParticipant: false,
   });
   const storeNameRef = useRef();
+  const contactRef = useRef();
+  const emailRef = useRef();
   const websiteRef = useRef();
+  const phoneRef = useRef();
+  const storeTypeRentalRef = useRef();
+  const storeTypeSalesRef = useRef();
   const streetAddressRef = useRef();
   const cityRef = useRef();
   const stateProvinceRef = useRef();
@@ -26,6 +40,12 @@ const RegisterForm = () => {
     event.preventDefault();
     if (!storeNameRef.current.value) {
       storeNameRef.current.classList.add("error");
+    }
+    if (!contactRef.current.value) {
+      contactRef.current.classList.add("error");
+    }
+    if (!emailRef.current.value) {
+      emailRef.current.classList.add("error");
     }
     if (!websiteRef.current.value) {
       websiteRef.current.classList.add("error");
@@ -42,21 +62,32 @@ const RegisterForm = () => {
     if (!countryRef.current.value) {
       countryRef.current.classList.add("error");
     }
-    if (storeNameRef.current.value && websiteRef.current.value && streetAddressRef.current.value && cityRef.current.value && stateProvinceRef.current.value && countryRef.current.value) {
+    if (storeNameRef.current.value && contactRef.current.value && emailRef.current.value && websiteRef.current.value && streetAddressRef.current.value && cityRef.current.value && stateProvinceRef.current.value && countryRef.current.value) {
       setPayload({
         storeName: storeNameRef.current.value,
+        contact: contactRef.current.value,
+        email: emailRef.current.value,
         website: websiteRef.current.value,
+        phone: phoneRef.current.value,
         streetAddress: streetAddressRef.current.value,
         city: cityRef.current.value,
+        stateprovince: stateProvinceRef.current.value,
         country: countryRef.current.value,
         instagram: instagramRef.current.value,
         facebook: facebookRef.current.value,
-        vsd_id: Date.now().toString(36) + Math.random().toString(36).substring(4, 12).padStart(10, 0),
+        rent: storeTypeRentalRef.current.checked ? "Y" : "N",
+        sales: storeTypeSalesRef.current.checked ? "Y" : "N",
+        videoStoreDayParticipant: false,
       });
+      postStoreRecord();
       changePage(2);
     }
     return;
   };
+
+  const postStoreRecord = () => {
+    addStore({ variables: { title: payload.storeName, storedata: payload }});
+  }
 
   const handlePaymentSubmit = (event) => {
     event.preventDefault();
@@ -70,6 +101,18 @@ const RegisterForm = () => {
     if (event.target.value) {
       event.target.classList.remove("error");
     }
+  }
+
+  if (loading) {
+    return (
+      <p>loading...</p>
+    );
+  }
+
+  if (error) {
+    return(
+      <p>Something went wrong creating the store record.</p>
+    );
   }
 
   if (formStage === 2) {
@@ -108,6 +151,28 @@ const RegisterForm = () => {
             onChange={clearError}
           />
         </label>
+        <label htmlFor="contact">Contact Name:* 
+          <input 
+            type="text" 
+            name="contact"
+            id="contact"
+            required={true}
+            ref={contactRef}
+            onChange={clearError}
+          />
+        </label>
+      </div>
+      <div className="twoColumn">
+        <label htmlFor="email">Email address:* 
+          <input 
+            type="email" 
+            name="email"
+            id="email"
+            required={true}
+            ref={emailRef}
+            onChange={clearError}
+          />
+        </label>
         <label htmlFor="website">Website:* 
           <input 
             type="text" 
@@ -118,6 +183,26 @@ const RegisterForm = () => {
             onChange={clearError}
           />
         </label>
+      </div>
+      <div className="twoColumn">
+        <label htmlFor="phone">Phone number: 
+          <input 
+            type="phone" 
+            name="phone"
+            id="phone"
+            ref={phoneRef}
+          />
+        </label>
+        <div>
+          <label htmlFor="storeTypeRental">
+            <input type="checkbox" name="storeTypeRental" id="storeTypeRental" ref={storeTypeRentalRef} />
+            Check this box if you <span className="bold">rent</span> physical media
+          </label>
+          <label htmlFor="storeTypeSales">
+            <input type="checkbox" name="storeTypeSales" id="storeTypeSales" ref={storeTypeSalesRef} />
+            Check this box if you <span className="bold">sell</span> physical media 
+          </label>
+        </div>
       </div>
       <label htmlFor="address">Street address:* 
         <input 

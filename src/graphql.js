@@ -1,5 +1,33 @@
 import { gql } from "@apollo/client";
 
+export const CREATE_STORE = gql`
+  input CreateStoreInput {
+    storeName: String!
+    contact: String!
+    email: String!
+    website: String!
+    phone: String
+    streetAddress: String!
+    city: String!
+    stateprovince: String!
+    country: String!
+    instagram: String
+    facebook: String
+    rent: Boolean
+    sales: Boolean
+    videoStoreDayParticipant: Boolean!
+  }
+
+  mutation CreateStore($title: String!, $storedata: CreateStoreInput!) {
+    createStore(title: $title, videoStoreDayFields: $storedata) {
+      store {
+        id
+        title
+      }
+    }
+  }
+`;
+
 export const ADD_REGISTRATION_TO_CART = gql`
   mutation AddRegistrationToCart {
     addToCart(input: { productId: 126, quantity: 1 }) {
