@@ -1,25 +1,20 @@
 import { gql } from "@apollo/client";
+const log = import.meta.env.VITE_ADMIN_LOGIN;
+const pass = import.meta.env.VITE_ADMIN_PW;
 
+// export const CREATE_STORE = gql`
+//   mutation CreateNewStore($input: CreateStoreInput!) {
+//     createStore(input: $input) {
+//       store {
+//         id
+//         title
+//       }
+//     }
+//   }
+// `;
 export const CREATE_STORE = gql`
-  input CreateStoreInput {
-    storeName: String!
-    contact: String!
-    email: String!
-    website: String!
-    phone: String
-    streetAddress: String!
-    city: String!
-    stateprovince: String!
-    country: String!
-    instagram: String
-    facebook: String
-    rent: Boolean
-    sales: Boolean
-    videoStoreDayParticipant: Boolean!
-  }
-
-  mutation CreateStore($title: String!, $storedata: CreateStoreInput!) {
-    createStore(title: $title, videoStoreDayFields: $storedata) {
+  mutation CreateNewStore($title: String!) {
+    createStore(input: { title: $title }) {
       store {
         id
         title
@@ -57,6 +52,23 @@ export const GET_CURRENT_SESSION_TOKEN = gql`
   query {
     customer {
       sessionToken
+    }
+  }
+`;
+
+export const GET_ADMIN_TOKEN = gql`
+  mutation GetToken {
+    login(
+      input: { password: "${pass}", username: "${log}" }
+    ) {
+      clientMutationId
+      authToken
+      refreshToken
+      sessionToken
+      user {
+        id
+        name
+      }
     }
   }
 `;

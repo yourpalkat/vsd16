@@ -1,27 +1,28 @@
 import { useState, useRef } from "react";
 import { useMutation } from "@apollo/client/react";
-import { CREATE_STORE } from "../graphql";
+import { CREATE_STORE, GET_ADMIN_TOKEN } from "../graphql";
+// import { GraphQLClient } from "graphql-request";
 import "./registerForm.css";
 
 const RegisterForm = () => {
   const [addStore, { data, loading, error }] = useMutation(CREATE_STORE);
   const [formStage, setFormStage] = useState(1);
-  const [payload, setPayload] = useState({
-    storeName: "",
-    contact: "",
-    email: "",
-    website: "", 
-    phone: "",
-    streetAddress: "", 
-    city: "", 
-    stateprovince: "", 
-    country: "",
-    instagram: "",
-    facebook: "",
-    rent: false,
-    sales: false,
-    videoStoreDayParticipant: false,
-  });
+  // const [payload, setPayload] = useState({
+  //   storeName: "",
+  //   contact: "",
+  //   email: "",
+  //   website: "", 
+  //   phone: "",
+  //   street_address: "", 
+  //   city: "", 
+  //   stateprovince: "", 
+  //   country: "",
+  //   instagram: "",
+  //   facebook: "",
+  //   rent: false,
+  //   sales: false,
+  //   video_store_day_participant: false,
+  // });
   const storeNameRef = useRef();
   const contactRef = useRef();
   const emailRef = useRef();
@@ -63,7 +64,7 @@ const RegisterForm = () => {
       countryRef.current.classList.add("error");
     }
     if (storeNameRef.current.value && contactRef.current.value && emailRef.current.value && websiteRef.current.value && streetAddressRef.current.value && cityRef.current.value && stateProvinceRef.current.value && countryRef.current.value) {
-      setPayload({
+      const payload = {
         storeName: storeNameRef.current.value,
         contact: contactRef.current.value,
         email: emailRef.current.value,
@@ -75,18 +76,29 @@ const RegisterForm = () => {
         country: countryRef.current.value,
         instagram: instagramRef.current.value,
         facebook: facebookRef.current.value,
-        rent: storeTypeRentalRef.current.checked ? "Y" : "N",
-        sales: storeTypeSalesRef.current.checked ? "Y" : "N",
+        rent: storeTypeRentalRef.current.checked,
+        sales: storeTypeSalesRef.current.checked,
         videoStoreDayParticipant: false,
-      });
-      postStoreRecord();
+      };
+      postStoreRecord(payload);
       changePage(2);
     }
     return;
   };
 
-  const postStoreRecord = () => {
-    addStore({ variables: { title: payload.storeName, storedata: payload }});
+  const testSubmit = async () => {
+    // const endpoint = import.meta.env.VITE_GRAPHQL_ENDPOINT;
+    // const graphQLClient = new GraphQLClient(endpoint);
+    // const response = await graphQLClient.request(GET_ADMIN_TOKEN);
+    // console.log("RESPONSE: ", response);
+    // const token = response?.login?.sessionToken;
+
+    addStore({ variables: { title: "Test Store" }});
+  }
+
+  const postStoreRecord = (storedata) => {
+    // addStore({ variables: { input: {title: storedata.storeName, videoStoreFields: storedata}}});
+    addStore({ variables: { title: storedata.storeName }});
   }
 
   const handlePaymentSubmit = (event) => {
@@ -110,12 +122,16 @@ const RegisterForm = () => {
   }
 
   if (error) {
+    console.log("Error creating store record! ", error);
+
     return(
       <p>Something went wrong creating the store record.</p>
     );
   }
-
+  
   if (formStage === 2) {
+    console.log("store posted: ", data);
+
     return (
       <form
         className="registerForm"
@@ -140,6 +156,9 @@ const RegisterForm = () => {
       id="registerForm"
       onSubmit={handleDataSubmit}
     >
+      <button type="button" className="cta" onClick={testSubmit}>
+        Test submit
+      </button>
       <div className="twoColumn">
         <label htmlFor="storeName">Name of your store:* 
           <input 

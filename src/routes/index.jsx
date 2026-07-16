@@ -5,10 +5,10 @@ import CountdownTimer from "../components/Countdown";
 import StoreSample from "../components/StoreSample";
 
 export const Route = createFileRoute("/")({
-  component: Index,
+  component: Homepage,
 });
 
-export function Index() {
+function Homepage() {
   const { loading, error, data } = useQuery(GET_HOME_PAGE_CONTENT);
 
   if (loading) {
